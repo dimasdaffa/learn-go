@@ -1,14 +1,13 @@
 package main
 
 import (
-	// "fmt"
 	"go-todo/config"
 	"go-todo/controller"
 
 	"github.com/gin-gonic/gin"
 )
 
-func main ()  {
+func main() {
 	config.ConnectDatabase()
 
 	r := gin.Default()
@@ -17,8 +16,12 @@ func main ()  {
 			"message": "pong",
 		})
 	})
-	r.GET("/todos", controller.GetTodos) //API Endpoint
-	r.POST("/todos", controller.CreateTodo) //API Endpoint
 
-	r.Run() // listen and serve on 0.0.0.0:8080
+	r.GET("/todos", controller.GetTodos)
+	r.POST("/todos", controller.CreateTodo)
+	r.GET("/todos/:id", controller.GetTodoById)
+	r.PUT("/todos/:id", controller.UpdateTodoById)
+	r.DELETE("/todos/:id", controller.DeleteTodoById)
+
+	r.Run()
 }
